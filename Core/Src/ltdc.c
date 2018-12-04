@@ -58,7 +58,6 @@ void MX_LTDC_Init(void)
   hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL;
   hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;
   hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
-	//下面注释去掉不显示 莫名其妙
   hltdc.Init.HorizontalSync = 858; //(HSW-1) 
   hltdc.Init.VerticalSync = 3;//(VSW-1)
   hltdc.Init.AccumulatedHBP = 123;//HSW+HBP-1
