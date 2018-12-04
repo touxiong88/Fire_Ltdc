@@ -58,14 +58,16 @@ void MX_LTDC_Init(void)
   hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL;
   hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;
   hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
-  hltdc.Init.HorizontalSync = 858;
-  hltdc.Init.VerticalSync = 3;
-  hltdc.Init.AccumulatedHBP = 123;
-  hltdc.Init.AccumulatedVBP = 38;
-  hltdc.Init.AccumulatedActiveW = 734;
-  hltdc.Init.AccumulatedActiveH = 485;
-  hltdc.Init.TotalWidth = 740;
-  hltdc.Init.TotalHeigh = 487;
+	//下面注释去掉不显示 莫名其妙
+  hltdc.Init.HorizontalSync = 858; //(HSW-1) 
+  hltdc.Init.VerticalSync = 3;//(VSW-1)
+  hltdc.Init.AccumulatedHBP = 123;//HSW+HBP-1
+  hltdc.Init.AccumulatedVBP = 38;//VSW+VBP-1
+  hltdc.Init.AccumulatedActiveW = 734;/*HSW+HBP+ width -1*/
+  hltdc.Init.AccumulatedActiveH = 485;//VSW+VBP+HEIGHT-1
+  hltdc.Init.TotalWidth = 740;//HSW+HBP+WIDTH+HFP-1
+  hltdc.Init.TotalHeigh = 487;//VSW+VBP+HEIGHT+VFP-1
+
   hltdc.Init.Backcolor.Blue = 0;
   hltdc.Init.Backcolor.Green = 0;
   hltdc.Init.Backcolor.Red = 0;
