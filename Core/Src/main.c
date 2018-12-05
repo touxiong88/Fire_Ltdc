@@ -65,6 +65,21 @@ uint8_t Rtab[20];
 void SystemClock_Config(void);
 static void MX_NVIC_Init(void);
 
+//直接写显存显示一帧数据
+void DisplayLine(void)
+{
+	uint16_t i,j;
+	uint32_t *p = (uint32_t *)(LCD_LAYER1_START_ADDR + LCD_WIDTH * 3);//通过RGB的R输出数据
+	for(i=0;i<LCD_HEIGHT*2;i++)//每个像素点占2个字节,即需要传输两个RGB像素中的R数据
+		for(j=0;j<LCD_WIDTH;j++)
+		{
+			//YCbCr
+			*p = 0xaaaa;//
+			p++;
+			
+		}
+	
+}
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
 
@@ -130,6 +145,7 @@ int main(void)
   {
 		HAL_GPIO_TogglePin(LED4_GPIO_Port,LED4_Pin);
 		HAL_Delay(100);
+		DisplayLine();
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */

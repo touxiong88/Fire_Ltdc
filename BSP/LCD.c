@@ -104,9 +104,15 @@ void SPI_SendData(uint8_t addr,uint8_t dat)
 	HAL_SPI_Transmit(&hspi2,(uint8_t *)&dat,1,0xFF);
 	HAL_GPIO_WritePin(CS_GPIO_Port, CS_Pin, GPIO_PIN_SET);
 }
-
+void LCD_Reset(void)
+{
+	HAL_GPIO_WritePin(LCD_RST_GPIO_Port, LCD_RST_Pin, GPIO_PIN_RESET);
+	HAL_Delay(500);
+	HAL_GPIO_WritePin(LCD_RST_GPIO_Port, LCD_RST_Pin, GPIO_PIN_SET);
+}
 void LCD_Configuration(void)
 {
+	LCD_Reset();
 	SPI_SendData(0x00,0x03);
 //	SPI_SendData(0x01,0x21);
 	SPI_SendData(0x02,0x27);
@@ -177,6 +183,7 @@ void LCD_Configuration(void)
 	SPI_SendData(0x43,0x00);
 	SPI_SendData(0x44,0x29);
 }
+
 
 
 
