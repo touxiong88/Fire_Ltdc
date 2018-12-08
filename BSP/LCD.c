@@ -79,113 +79,35 @@ const uint16_t init_dat[68]=
 
 void SPI2_Reg_Write(void)
 {
-	uint8_t regH;
-	uint8_t regL;
+	uint8_t reg;
+	uint8_t value;
+	
 	HAL_GPIO_WritePin(CS_GPIO_Port, CS_Pin, GPIO_PIN_RESET);
 	for(uint8_t i=0;i<sizeof(init_dat);i++)
 	{
-		regH=init_dat[i]>>8;
-		regL=init_dat[i];
-		if(HAL_SPI_Transmit(&hspi2, (uint8_t *)&regH, 1, 1000)!=HAL_OK)
+		reg=init_dat[i]>>8;
+		value=init_dat[i];
+		if(HAL_SPI_Transmit(&hspi2, (uint8_t *)&reg, 1, 1000)!=HAL_OK)
 		{
 		}
-		if(HAL_SPI_Transmit(&hspi2, (uint8_t *)&regL, 1, 1000)!=HAL_OK)
+		if(HAL_SPI_Transmit(&hspi2, (uint8_t *)&value, 1, 1000)!=HAL_OK)
 		{
 		}
 	}
 	HAL_GPIO_WritePin(CS_GPIO_Port, CS_Pin, GPIO_PIN_SET);
 }
 
-void SPI_SendData(uint8_t addr,uint8_t dat)
-{
-	HAL_GPIO_WritePin(CS_GPIO_Port, CS_Pin, GPIO_PIN_RESET);
-	__NOP();__NOP();__NOP();__NOP();__NOP();
-	HAL_SPI_Transmit(&hspi2,(uint8_t *)&addr,1,0xFF);
-	HAL_SPI_Transmit(&hspi2,(uint8_t *)&dat,1,0xFF);
-	HAL_GPIO_WritePin(CS_GPIO_Port, CS_Pin, GPIO_PIN_SET);
-}
 void LCD_Reset(void)
 {
 	HAL_GPIO_WritePin(LCD_RST_GPIO_Port, LCD_RST_Pin, GPIO_PIN_RESET);
-	HAL_Delay(500);
+	HAL_Delay(100);
 	HAL_GPIO_WritePin(LCD_RST_GPIO_Port, LCD_RST_Pin, GPIO_PIN_SET);
+	HAL_Delay(500);
 }
-void LCD_Configuration(void)
+void Lcd_Init(void)
 {
 	LCD_Reset();
-	SPI_SendData(0x00,0x03);
-//	SPI_SendData(0x01,0x21);
-	SPI_SendData(0x02,0x27);
-	SPI_SendData(0x03,0xEF);
-	SPI_SendData(0x04,0x7B);
-	SPI_SendData(0x05,0x8C);
-	SPI_SendData(0x06,0x80);
-	SPI_SendData(0x07,0x97);
-	SPI_SendData(0x08,0x1B);
-	SPI_SendData(0x09,0x01);
-	SPI_SendData(0x0A,0x25);
-	SPI_SendData(0x0B,0x20);
-	SPI_SendData(0x0C,0x20);
-	SPI_SendData(0x0D,0x0D);
-	SPI_SendData(0x0E,0x20);
-	SPI_SendData(0x0F,0x20);
-	SPI_SendData(0x10,0x40);
-	SPI_SendData(0x11,0x3F);
-	SPI_SendData(0x12,0x31);
-	SPI_SendData(0x13,0x40);
-	SPI_SendData(0x14,0x08);
-	SPI_SendData(0x15,0x06);
-	SPI_SendData(0x16,0x08);
-	SPI_SendData(0x17,0x0A);
-	SPI_SendData(0x18,0x35);
-	SPI_SendData(0x19,0xFF);
-	SPI_SendData(0x1A,0x00);
-	SPI_SendData(0x1B,0x80);
-	SPI_SendData(0x1C,0x00);
-	SPI_SendData(0x1D,0x00);
-	SPI_SendData(0x1E,0x00);
-	SPI_SendData(0x1F,0x3F);
-	SPI_SendData(0x20,0x85);
-	SPI_SendData(0x21,0x80);
-	SPI_SendData(0x22,0x80);
-	SPI_SendData(0x23,0x80);
-	SPI_SendData(0x24,0x00);
-	SPI_SendData(0x25,0x80);
-	SPI_SendData(0x26,0x80);
-	SPI_SendData(0x27,0x0C);
-	SPI_SendData(0x28,0x2B);
-	SPI_SendData(0x29,0x23);
-	SPI_SendData(0x2A,0x28);
-	SPI_SendData(0x2B,0x28);
-	SPI_SendData(0x2C,0x30);
-	SPI_SendData(0x2D,0x3B);
-	SPI_SendData(0x2E,0x00);
-	SPI_SendData(0x2F,0x08);
-	SPI_SendData(0x30,0x00);
-	SPI_SendData(0x31,0x00);
-	SPI_SendData(0x32,0x00);
-	SPI_SendData(0x33,0x00);
-	SPI_SendData(0x34,0x00);
-	SPI_SendData(0x35,0x00);
-	SPI_SendData(0x36,0x00);
-	SPI_SendData(0x37,0x00);
-	SPI_SendData(0x38,0x00);
-	SPI_SendData(0x39,0x00);
-	SPI_SendData(0x3A,0x00);
-	SPI_SendData(0x3B,0x00);
-	SPI_SendData(0x3C,0x00);
-	SPI_SendData(0x3D,0x00);
-	SPI_SendData(0x3E,0x00);
-	SPI_SendData(0x3F,0x00);
-	SPI_SendData(0x40,0x00);
-	SPI_SendData(0x41,0x8E);
-	SPI_SendData(0x42,0xA0);
-	SPI_SendData(0x43,0x00);
-	SPI_SendData(0x44,0x29);
+	SPI2_Reg_Write();
 }
-
-
-
-
 
 

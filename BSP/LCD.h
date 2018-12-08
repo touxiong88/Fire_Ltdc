@@ -22,6 +22,6 @@
 
 
 void SPI2_Reg_Write(void);
-void LCD_Configuration(void);
+void Lcd_Init(void);
 void SPI_SendData(uint8_t addr,uint8_t dat);
 #endif

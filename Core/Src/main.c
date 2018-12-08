@@ -74,7 +74,7 @@ void DisplayLine(void)
 		for(j=0;j<LCD_WIDTH;j++)
 		{
 			//YCbCr
-			*p = 0xaaaa;//
+			*p = 0xaaaaaa;//
 			p++;
 			
 		}
@@ -133,7 +133,8 @@ int main(void)
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 	SDRAM_Init();
-	LCD_Configuration();	
+	//LCD_Configuration();
+	Lcd_Init();	
 
 	HAL_DMA2D_Start_IT(&hdma2d, (uint32_t)image1, (uint32_t)0xD0000000, 320, 240);
 
@@ -145,7 +146,7 @@ int main(void)
   {
 		HAL_GPIO_TogglePin(LED4_GPIO_Port,LED4_Pin);
 		HAL_Delay(100);
-		DisplayLine();
+		//DisplayLine();
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
