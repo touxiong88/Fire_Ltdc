@@ -25,4 +25,7 @@ JLinkLog.txt
 *.map
 MDK-ARM/Fire_Ltdc/Fire_Ltdc.hex
 MDK-ARM/Fire_Ltdc.uvguix.sunhz
+MDK-ARM/DebugConfig/Fire_Ltdc_STM32F767IGTx_2.0.0.dbgconf
+
+
 

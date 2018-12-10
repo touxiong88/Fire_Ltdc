@@ -51,22 +51,29 @@ LTDC_HandleTypeDef hltdc;
 /* LTDC init function */
 void MX_LTDC_Init(void)
 {
-  LTDC_LayerCfgTypeDef pLayerCfg;
 
+  /* USER CODE BEGIN LTDC_Init 0 */
+
+  /* USER CODE END LTDC_Init 0 */
+
+  LTDC_LayerCfgTypeDef pLayerCfg = {0};
+
+  /* USER CODE BEGIN LTDC_Init 1 */
+
+  /* USER CODE END LTDC_Init 1 */
   hltdc.Instance = LTDC;
   hltdc.Init.HSPolarity = LTDC_HSPOLARITY_AL;
   hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL;
   hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;
   hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
-  hltdc.Init.HorizontalSync = 858; //(HSW-1) 
-  hltdc.Init.VerticalSync = 3;//(VSW-1)
-  hltdc.Init.AccumulatedHBP = 123;//HSW+HBP-1
-  hltdc.Init.AccumulatedVBP = 38;//VSW+VBP-1
-  hltdc.Init.AccumulatedActiveW = 734;/*HSW+HBP+ width -1*/
-  hltdc.Init.AccumulatedActiveH = 485;//VSW+VBP+HEIGHT-1
-  hltdc.Init.TotalWidth = 740;//HSW+HBP+WIDTH+HFP-1
-  hltdc.Init.TotalHeigh = 487;//VSW+VBP+HEIGHT+VFP-1
-
+  hltdc.Init.HorizontalSync = 2;//(HSW-1) 
+  hltdc.Init.VerticalSync = 2;//(VSW-1)
+  hltdc.Init.AccumulatedHBP = 369;//HSW+HBP-1
+  hltdc.Init.AccumulatedVBP = 40;//VSW+VBP-1
+  hltdc.Init.AccumulatedActiveW = 1089;/*HSW+HBP+ width -1*/
+  hltdc.Init.AccumulatedActiveH = 520;//VSW+VBP+HEIGHT-1
+  hltdc.Init.TotalWidth = 1716;//HSW+HBP+WIDTH+HFP-1
+  hltdc.Init.TotalHeigh = 525;//VSW+VBP+HEIGHT+VFP-1
   hltdc.Init.Backcolor.Blue = 0;
   hltdc.Init.Backcolor.Green = 0;
   hltdc.Init.Backcolor.Red = 0;
@@ -74,22 +81,21 @@ void MX_LTDC_Init(void)
   {
     _Error_Handler(__FILE__, __LINE__);
   }
-
   pLayerCfg.WindowX0 = 0;
-  pLayerCfg.WindowX1 = 320;
+  pLayerCfg.WindowX1 = 0;
   pLayerCfg.WindowY0 = 0;
-  pLayerCfg.WindowY1 = 240;
+  pLayerCfg.WindowY1 = 0;
   pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB888;
-  pLayerCfg.Alpha = 0x7f;
-  pLayerCfg.Alpha0 = 0;
+  pLayerCfg.Alpha = 0xaa;
+  pLayerCfg.Alpha0 = 0xaa;
   pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
   pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
   pLayerCfg.FBStartAdress = 0xD0000000;
-  pLayerCfg.ImageWidth = 320;
-  pLayerCfg.ImageHeight = 240;
-  pLayerCfg.Backcolor.Blue = 0;
-  pLayerCfg.Backcolor.Green = 0;
-  pLayerCfg.Backcolor.Red = 0;
+  pLayerCfg.ImageWidth = 0;
+  pLayerCfg.ImageHeight = 0;
+  pLayerCfg.Backcolor.Blue = 0xaa;
+  pLayerCfg.Backcolor.Green = 0xaa;
+  pLayerCfg.Backcolor.Red = 0xaa;
   if (HAL_LTDC_ConfigLayer(&hltdc, &pLayerCfg, 0) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);
